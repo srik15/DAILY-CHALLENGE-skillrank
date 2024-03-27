@@ -1,6 +1,7 @@
 <h3>713. Subarray Product Less Than K</h3>
 Given an array of integers nums and an integer k, return the number of contiguous subarrays where the product of all the elements in the subarray is strictly less than k.
 <br>
+<h3>type 1 solution</h3>
 
 ```
 class Solution:
@@ -22,4 +23,24 @@ class Solution:
                 if val<k:
                     count+=1
         return count
+```
+
+
+<h3>type 2 solution</h3>
+
+```
+class Solution:
+    def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
+        le=len(nums)
+        i=0
+        count =0
+        val=1
+        for j in range(le):
+            val*=nums[j]
+            while i<=j and val>=k:
+                val/=nums[i]
+                i+=1
+            count+=(j-i+1)
+        return count
+            
 ```
